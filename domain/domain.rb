@@ -13,12 +13,10 @@ class Room
     @name = name
   end
 
-  def speaks(participant, what)
+  def speaks(who, what, time)
     #empty
-    puts "room: #{name} #{participant} spoken #{what}"
+    puts "#{name} #{time}> #{who}: #{what}"
   end
-
-
 end
 
 
@@ -28,7 +26,7 @@ class Domain
     @room = Room.new(room_name)
   end
 
-  def participant_speaks(participant, what)
-    @room.speaks(participant, what)
+  def participant_speaks(who, what, time)
+    @room.speaks(who, what, time)
   end
 end

@@ -1,8 +1,11 @@
-class Configuration
-  attr_accessor :url
+class Settings
+  attr_accessor :jid, :room, :password
 
   def initialize
-    @url = 'http://abc'
+    @jid = 'me@some.jabber.server/Something'
+    @room = 'some.groupchat@some.other.name.server/my.nick'
+    @password = 'my.password'
   end
 end
+
 

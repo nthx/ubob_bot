@@ -15,7 +15,7 @@ class PersistenceHex
 
   def store_usecase_data(leaderboard)
     data = {}
-    leaderboard.each do |leader, data|
+    leaderboard.each do |leader, leader_data|
       data[leader] = {:number => 0, :history => {}}
       data[leader][:number] = leaderboard[leader][:number]
     end

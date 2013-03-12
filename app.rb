@@ -64,5 +64,6 @@ jabber = app.jabber
 #jabber.spoken("michal", "bot: welcome", Time.new)
 #jabber.spoken("kuba", "tomek: +1", Time.new)
 #jabber.spoken("kuba", "bot: leaderboard", Time.new)
+#jabber.spoken("kuba", "bot: solid", Time.new)
 
 sleep(99999)

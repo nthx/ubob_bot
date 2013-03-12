@@ -37,7 +37,7 @@ class Channel
 
   def self.said_plus_one_to_noone(what)
     receivier = fetch_receivier what
-    what.start_with? "+1" and not receivier
+    what.include? "+1" and not receivier
   end
 
 
@@ -55,7 +55,7 @@ class Channel
 
   def self.fetch_action_params(what)
     chunked = what.split.map {|x| x.strip}
-    return nil unless chunked.length > 0
+    return nil if chunked.length <= 2
     action = chunked[2..chunked.length].join ' '
   end
 

@@ -6,6 +6,7 @@ require_relative './bothering_me'
 require_relative './say_welcome'
 require_relative './say_cow'
 require_relative './say_lama'
+require_relative './solid'
 require_relative './help'
 
 class Usecases
@@ -21,6 +22,7 @@ class Usecases
     #BotByzantine.new domain
     BotShowLeaderboard.new domain, self
     @plusone = PlusOneLeaderboard.new domain, self
+    BotSolid.new domain
     BotHelp.new domain
     BotMeta.new domain
   end

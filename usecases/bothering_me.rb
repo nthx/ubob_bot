@@ -22,7 +22,7 @@ class BotMeta
   private
   def said_something_not_important(what, to_whom)
     action = Channel.fetch_action what
-     not 'leaderboard help welcome +1 lama bizancjum cow +1s stats'.include? action \
+     not 'leaderboard help welcome solid +1 lama bizancjum cow +1s stats'.include? action \
      and not Channel.said_plus_one_to_someone what, to_whom \
      and not Channel.said_minus_to_someone what, to_whom \
      and not Channel.said_plus_one_to_noone what
@@ -44,12 +44,12 @@ class BotMeta
       "Are you?",
       "lol",
       "I find it amusing",
-      "I say it's cause of Bizantine Empire",
+      "I say it's cause of Byzantine Empire",
       "?"
     ].sample
   end
 
   def wants_to_say
-    (Random.rand 10) <= 8
+    (Random.rand 10) <= 3
   end
 end

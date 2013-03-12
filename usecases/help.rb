@@ -17,6 +17,6 @@ class BotHelp
   end
 
   def say_help(who, to_whom, what, time)
-    domain.bot_speaks "#{to_whom}: welcome, +1 <nick>, leaderboard, cow <text>, cow fortune, lama, <surprise for staszek>"
+    domain.bot_speaks "#{to_whom}: welcome, +1 <nick>, leaderboard, cow <text>, cow fortune, lama, <surprise for staszek> solid"
   end
 end

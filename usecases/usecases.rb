@@ -10,21 +10,36 @@ require_relative './solid'
 require_relative './help'
 
 class Usecases
-  attr_accessor :leaderboard, :domain, :plusone
+  attr_reader :leaderboard, :usecase_plusone
 
   def initialize(domain)
     @domain = domain
     @leaderboard = {}
 
-    BotWelcome.new domain
-    BotLama.new domain
-    BotCow.new domain
-    #BotByzantine.new domain
-    BotShowLeaderboard.new domain, self
-    @plusone = PlusOneLeaderboard.new domain, self
-    BotSolid.new domain
-    BotHelp.new domain
-    BotMeta.new domain
+    usecases = []
+    running = {}
+
+    usecases << BotWelcome
+    usecases << BotLama
+    usecases << BotCow
+    usecases << BotByzantine
+    usecases << BotShowLeaderboard
+    usecases << PlusOneLeaderboard
+    usecases << BotSolid
+    usecases << BotHelp
+    usecases << BotBotheringMe
+
+    usecases.map do |clazz|
+      usecase = clazz.new domain
+      running[clazz] = usecase
+    end
+
+    running[BotHelp].setup(running)
+    running[BotBotheringMe].setup(running)
+    running[PlusOneLeaderboard].setup(@leaderboard)
+    running[BotShowLeaderboard].setup(@leaderboard)
+
+    @usecase_plusone = running[PlusOneLeaderboard]
   end
 end
 

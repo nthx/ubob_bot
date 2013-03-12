@@ -1,17 +1,19 @@
 class BotByzantine
   include RoomObserver
 
-  attr_accessor :domain
+  attr_reader :domain, :channel_actions
 
   def initialize(domain)
     @domain = domain
     @data = prepare_data
+    @channel_actions = 'bizancjum'
     watch_room
   end
 
   def on_say(who, to_whom, what, time)
     return if who == 'bot'
-    if what.downcase.include? "bizan"
+    if Channel.said_action_to what, "bot", channel_actions \
+       or what.downcase.include? "bizan"
       say_something_on_byzantine(who, what, time)
     end
   end

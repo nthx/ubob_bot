@@ -2,10 +2,12 @@
 class BotSolid
   include RoomObserver
 
-  attr_accessor :domain, :principles
+  attr_reader :domain, :channel_actions, :principles, :verbose
 
   def initialize(domain)
     @domain = domain
+    @verbose = '-v / extra / more'
+    @channel_actions = " solid help | solid | solid? | ubob | solid <principle> <#{verbose}>"
     watch_room
 
     @principles = [
@@ -26,11 +28,11 @@ class BotSolid
 
   def on_say(who, to_whom, what, time)
     return if who == 'bot'
-    return if to_whom != 'bot' and not %w'solid solid?'.include? what
-    params = Channel.fetch_action_params what
-    action = Channel.fetch_action what
-    return unless (action == 'solid' or action == 'solid?')
+    return if to_whom != 'bot' \
+      and not Channel.split_actions(channel_actions).include? what
+    return unless Channel.said_action what, channel_actions
 
+    params = Channel.fetch_action_params what
     if params
       if 'help' == params
         say_solid_help
@@ -137,7 +139,7 @@ Disadvantages.. who cares?
       [a, b]
     end
 
-    if which.include? 'more' or which.include? 'extra' or which.include? '-v'
+    if verbose.split('/').find {|elem| which.strip.include? elem.strip}
       domain.bot_speaks principle_extra
     else
       domain.bot_speaks principle

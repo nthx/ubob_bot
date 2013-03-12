@@ -15,10 +15,39 @@ module RoomObserver
 end
 
 class Channel
-  def self.said_action_to(what, to_whom, action)
-    return if not said_to what, to_whom
+  def self.said_action(what, actions)
+    actions = split_actions_remove_params(actions)
     actual_action = fetch_action what
-    actual_action == action
+    actions.include? actual_action.downcase
+  end
+
+  def self.said_action_to(what, to_whom, actions)
+    return false if not said_to what, to_whom
+    said_action what, actions
+  end
+
+  def self.split_actions(actions)
+    if actions.is_a? String
+      if actions.include? '|'
+        actions.split('|').map {|x| x.strip }
+      else
+        actions.split
+      end
+    else
+      actions
+    end
+  end
+
+  def self.split_actions_remove_params(actions)
+    if actions.is_a? String
+      if actions.include? '|'
+        actions.gsub(/<.*>/, '').split('|').map {|x| x.strip }
+      else
+        actions.split
+      end
+    else
+      actions
+    end
   end
 
   def self.said_to(what, to_whom)

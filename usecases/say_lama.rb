@@ -1,17 +1,17 @@
-
 class BotLama
   include RoomObserver
 
-  attr_accessor :domain
+  attr_reader :domain, :channel_actions
 
   def initialize(domain)
     @domain = domain
+    @channel_actions = 'lama'
     watch_room
   end
 
   def on_say(who, to_whom, what, time)
     return if who == 'bot'
-    if Channel.said_action_to what, 'bot', 'lama'
+    if Channel.said_action_to what, 'bot', channel_actions
       draw_lama(who, what, time)
     end
   end
@@ -21,6 +21,6 @@ class BotLama
     domain.bot_speaks "/ \\"
     domain.bot_speaks "|..|"
     domain.bot_speaks "  * "
-    domain.bot_speaks "  /|"
+    domain.bot_speaks "  /\\"
   end
 end

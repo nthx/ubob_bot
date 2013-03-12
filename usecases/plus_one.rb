@@ -1,18 +1,21 @@
-
 class PlusOneLeaderboard
   include RoomObserver
 
-  attr_accessor :domain, :leaderboard
+  attr_reader :domain, :leaderboard, :channel_actions
 
-  def initialize(domain, usecases)
+  def initialize(domain)
     @domain = domain
-    @leaderboard = usecases.leaderboard
+    @channel_actions = '+1 | -1'
     watch_room
   end
 
+  def setup(leaderboard)
+    @leaderboard = leaderboard
+  end
+
   def on_say(who, to_whom, what, time)
-    if Channel.said_plus_one_to_noone what \
-      and who != 'bot'
+    return if who == 'bot'
+    if Channel.said_plus_one_to_noone what
       say_unsure
     end
 

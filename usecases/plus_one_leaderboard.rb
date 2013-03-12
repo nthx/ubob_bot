@@ -1,20 +1,21 @@
-
 class BotShowLeaderboard
   include RoomObserver
 
-  attr_accessor :domain, :leaderboard
+  attr_reader :domain, :leaderboard, :channel_actions
 
-  def initialize(domain, usecases)
+  def initialize(domain)
     @domain = domain
-    @leaderboard = usecases.leaderboard
+    @channel_actions = 'leaderboard | stats'
     watch_room
+  end
+
+  def setup(leaderboard)
+    @leaderboard = leaderboard
   end
 
   def on_say(who, to_whom, what, time)
     return if who == 'bot'
-    if Channel.said_action_to what, "bot", "leaderboard" \
-       or Channel.said_action_to what, "bot", "stats" \
-       or Channel.said_action_to what, "bot", "+1s"
+    if Channel.said_action_to what, "bot", channel_actions
       show_leaderboard(who, what, time)
     end
   end
@@ -27,7 +28,6 @@ class BotShowLeaderboard
     end
 
     if to_speak.length > 0
-      domain.bot_speaks "+1 (tm) Leader Board"
       to_speak.each {|x| domain.bot_speaks x}
     else
       domain.bot_speaks "not yet my man, not yet.."

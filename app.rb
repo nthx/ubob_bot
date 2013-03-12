@@ -42,7 +42,7 @@ class App
     before @domain, :start do |jp, domain|
       @persistence.load_usecase_data @usecases.leaderboard
     end
-    after @usecases.plusone, :remember do |jp, plusone|
+    after @usecases.usecase_plusone, :remember do |jp, usecase_plusone|
       @persistence.store_usecase_data @usecases.leaderboard
     end
   end

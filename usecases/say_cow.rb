@@ -29,7 +29,6 @@ class BotCow
     stdout.readlines.each do |x|
       t = x.gsub "\n", ''
       domain.bot_speaks t
-      puts t
     end
   end
 end

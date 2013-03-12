@@ -8,20 +8,18 @@ require_relative './say_cow'
 require_relative './say_lama'
 
 class Usecases
-  attr_accessor :leaderboard, :domain
+  attr_accessor :leaderboard, :domain, :plusone
 
   def initialize(domain)
     @domain = domain
     @leaderboard = {}
-  end
 
-  def start
     BotWelcome.new domain
     BotLama.new domain
     BotCow.new domain
     #BotByzantine.new domain
-    PlusOneLeaderboard.new domain, self
     BotShowLeaderboard.new domain, self
+    @plusone = PlusOneLeaderboard.new domain, self
     BotMeta.new domain
   end
 end

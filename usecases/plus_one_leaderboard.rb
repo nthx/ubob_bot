@@ -22,7 +22,7 @@ class BotShowLeaderboard
   def show_leaderboard(who, what, time)
     to_speak = []
     sorted = leaderboard.sort_by {|leader, data| -1 * data[:number]}
-    sorted.each do |leader, history|
+    sorted.each do |leader, data|
       to_speak << "  #{leader}: #{leaderboard[leader][:number]}"
     end
 

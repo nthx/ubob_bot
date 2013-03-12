@@ -45,6 +45,7 @@ class BotMeta
       "lol",
       "I find it amusing",
       "I say it's cause of Byzantine Empire",
+      "I'd rather die",
       "?"
     ].sample
   end

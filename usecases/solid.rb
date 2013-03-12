@@ -60,14 +60,25 @@ class BotSolid
       SRP
       [a, b]
 
-    elsif which.start_with? 'ocp'
-      a = <<-OCP
+    elsif which.start_with? 'lsp'
+      a = <<-LSP
       The Liskov Substitution Principle (LSP) states that "functions that use pointers or references to base classes must be able to use objects of derived classes without knowing it".
       When working with languages such as C#, this equates to "code that uses a base class must be able to substitute a subclass without knowing it"
-      OCP
-      b = <<-OCP
+      LSP
+      b = <<-LSP
       If the type of the dependency must be checked so that behaviour can be modified according to type,
       or if subtypes generated unexpected rules or side effects, the code may become more complex, rigid and fragile.
+      LSP
+      [a, b]
+
+    elsif which.start_with? 'ocp'
+      a = <<-OCP
+      The Open / Closed Principle (OCP) specifies that software entities (classes, modules, functions, etc.) should be open for extension but closed for modification.
+      The "closed" part of the rule states that once a module has been developed and tested, the code should only be adjusted to correct bugs.
+      The "open" part says that you should be able to extend existing code in order to introduce new functionality.
+      OCP
+      b = <<-OCP
+      As with the SRP, this principle reduces the risk of new errors being introduced by limiting changes to existing code.
       OCP
       [a, b]
 

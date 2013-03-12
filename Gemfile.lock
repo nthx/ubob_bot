@@ -3,6 +3,8 @@ GEM
   specs:
     aquarium (0.5.1)
     diff-lcs (1.2.1)
+    hpricot (0.8.6)
+    hpricot (0.8.6-java)
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -22,6 +24,7 @@ PLATFORMS
 
 DEPENDENCIES
   aquarium
+  hpricot
   rack-test
   rspec (~> 2.4)
   xmpp4r

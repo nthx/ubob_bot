@@ -9,6 +9,7 @@ end
 group :development, :production, :test do
   gem 'aquarium'
   gem 'xmpp4r'
+  gem 'hpricot'
 end
 
 group :test do

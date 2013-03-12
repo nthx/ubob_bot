@@ -18,3 +18,5 @@ _yardoc
 doc/
 configuration/settings.rb
 .rvmrc
+
+*.swp

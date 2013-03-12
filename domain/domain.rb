@@ -13,20 +13,30 @@ class Room
     @name = name
   end
 
-  def speaks(who, what, time)
+  def someone_spoken(who, what, time)
     #empty
-    puts "#{name} #{time}> #{who}: #{what}"
   end
 end
 
 
 class Domain
   def start(room_name)
-    puts "started"
     @room = Room.new(room_name)
   end
 
   def participant_speaks(who, what, time)
-    @room.speaks(who, what, time)
+    puts "participant_speaks: #{who} \"#{what}\""
+    to_whom = Channel.fetch_receivier(what)
+    someone_spoken_in_room(who, to_whom, what, time)
   end
+
+  def someone_spoken_in_room(who, to_whom, what, time)
+    @room.someone_spoken(who, what, time)
+  end
+
+  def bot_speaks(what)
+    #blank intentionally
+  end
+
+
 end

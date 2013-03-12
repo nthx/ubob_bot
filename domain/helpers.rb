@@ -49,8 +49,12 @@ class Channel
 
   def self.fetch_action(what)
     chunked = what.split.map {|x| x.strip}
-    return nil unless chunked.length > 0
-    action = chunked[1]
+    return nil if chunked.length == 0
+    if chunked.length == 1
+      chunked[0]
+    else
+      chunked[1]
+    end
   end
 
   def self.fetch_action_params(what)

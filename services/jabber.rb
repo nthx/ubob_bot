@@ -35,10 +35,19 @@ class JabberHex
         spoken(sender, text, time)
       end
     end
+    my_muc.on_private_message do |time, sender, text| 
+      if not still_connecting
+        private_message_to_bot(sender, text, time)
+      end
+    end
     my_muc.join(room_jid)
   end
 
   def spoken(who, what, time)
+    #intentionally empty
+  end
+
+  def private_message_to_bot(who, what, time)
     #intentionally empty
   end
 

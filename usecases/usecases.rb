@@ -6,6 +6,7 @@ require_relative './bothering_me'
 require_relative './say_welcome'
 require_relative './say_cow'
 require_relative './say_lama'
+require_relative './help'
 
 class Usecases
   attr_accessor :leaderboard, :domain, :plusone
@@ -20,6 +21,7 @@ class Usecases
     #BotByzantine.new domain
     BotShowLeaderboard.new domain, self
     @plusone = PlusOneLeaderboard.new domain, self
+    BotHelp.new domain
     BotMeta.new domain
   end
 end

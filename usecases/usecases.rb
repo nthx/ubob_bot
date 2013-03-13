@@ -7,6 +7,7 @@ require_relative './say_welcome'
 require_relative './say_cow'
 require_relative './say_lama'
 require_relative './solid'
+require_relative './kill_bartek'
 require_relative './help'
 
 class Usecases
@@ -26,6 +27,7 @@ class Usecases
     usecases << BotShowLeaderboard
     usecases << PlusOneLeaderboard
     usecases << BotSolid
+    usecases << KillBartek
     usecases << BotHelp
     usecases << BotBotheringMe
 

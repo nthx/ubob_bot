@@ -66,7 +66,7 @@ class JabberHex
   # Give 5 secs to read history messages Jabber sends when connecting
   # I don't want to parse them again, as they're duplicates
   def still_connecting
-    warmup=1
+    warmup=3
     now = Time.new
     (now - @when_connected).to_i <= warmup
   end

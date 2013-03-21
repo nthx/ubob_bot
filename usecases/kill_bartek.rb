@@ -10,9 +10,10 @@ class KillBartek
     watch_room
 
     @kills = [
+      "NoMethodError: Where? Here: (eval):95:in `get_objects'",
       "(eval):14:in `bucket_attribute' - and be happy .. not, when traceback is needed to actualy fucking TRACE",
-      "eval \"StbApiV#{@version} - and be happy Im a hacker",
-      "return url if url =~ %r(^https?://) - and be happy why the fuck someone includes https in database query",
+      "eval \"StbApiV#{@version} - and be happy being a hacker",
+      "return url if url =~ %r(^https?://) - and be happy why the fuck someone includes network protocol in SQL query .. while this information is NOT in database",
       "products['products'].first.should match /\#{@service.id} - and be happy 4500 chars long xml includes digit 1/"
     ]
   end

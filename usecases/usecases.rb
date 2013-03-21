@@ -9,6 +9,7 @@ require_relative './say_lama'
 require_relative './version'
 require_relative './solid'
 require_relative './kill_bartek'
+require_relative './c_programming'
 require_relative './help'
 
 class Usecases
@@ -32,6 +33,7 @@ class Usecases
     usecases << BotHelp
     usecases << BotVersion
     usecases << BotBotheringMe
+    usecases << BotCProgramming
 
     usecases.map do |clazz|
       usecase = clazz.new domain

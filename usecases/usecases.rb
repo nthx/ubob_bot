@@ -6,6 +6,7 @@ require_relative './bothering_me'
 require_relative './say_welcome'
 require_relative './say_cow'
 require_relative './say_lama'
+require_relative './version'
 require_relative './solid'
 require_relative './kill_bartek'
 require_relative './help'
@@ -29,6 +30,7 @@ class Usecases
     usecases << BotSolid
     usecases << KillBartek
     usecases << BotHelp
+    usecases << BotVersion
     usecases << BotBotheringMe
 
     usecases.map do |clazz|

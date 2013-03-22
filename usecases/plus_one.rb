@@ -20,7 +20,11 @@ class PlusOneLeaderboard
     end
 
     if Channel.said_plus_one_to_someone what, to_whom
-      remember(who, to_whom, what, time)
+      if who == to_whom
+        say_no_no_to_myself(who)
+      else
+        remember(who, to_whom, what, time)
+      end
 
     elsif Channel.said_minus_to_someone what, to_whom
       elaborate_on_minus who
@@ -45,6 +49,10 @@ class PlusOneLeaderboard
   private
   def say_unsure
     domain.bot_speaks "bit guessing what you're doing.. you have to give me more"
+  end
+
+  def say_no_no_to_myself(who)
+    domain.bot_speaks "#{who}: I'm an intelligent bot"
   end
 
   def elaborate_on_minus(who)

@@ -25,7 +25,7 @@ class Domain
   end
 
   def participant_speaks(who, what, time)
-    puts "> #{who}: \"#{what}\""
+    puts "> #{time} #{who}: \"#{what}\""
     to_whom = Channel.fetch_receivier(what)
     someone_spoken_in_room(who, to_whom, what, time)
   end

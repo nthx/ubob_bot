@@ -31,6 +31,9 @@ class JabberHex
     @when_connected = Time.new
     @my_muc = Jabber::MUC::SimpleMUCClient.new(client)
     my_muc.on_message do |time, sender, text| 
+      if not !!time
+        time = Time.new
+      end
       if not still_connecting
         spoken(sender, text, time)
       end

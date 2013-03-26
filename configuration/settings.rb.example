@@ -1,10 +1,12 @@
 class Settings
-  attr_accessor :jid, :room, :password
+  attr_accessor :jid, :room, :password, :db_plus_one, :db_chat
 
   def initialize
     @jid = 'me@some.jabber.server/Something'
     @room = 'some.groupchat@some.other.name.server/my.nick'
     @password = 'my.password'
+    @db_plus_one = 'database_plus_ones.yml'
+    @db_chat = 'database_chat.yml'
   end
 end
 

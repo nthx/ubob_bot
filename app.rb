@@ -40,10 +40,10 @@ class App
 
   def apply_usecases_glue
     before @domain, :start do |jp, domain|
-      @persistence.load_usecase_data @usecases.leaderboard
+      @persistence.load_usecase_data(@config.db_plus_one, @usecases.leaderboard)
     end
     after @usecases.usecase_plusone, :remember do |jp, usecase_plusone|
-      @persistence.store_usecase_data @usecases.leaderboard
+      @persistence.store_usecase_data(@config.db_plus_one, @usecases.leaderboard)
     end
   end
 

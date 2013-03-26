@@ -31,11 +31,15 @@ class JabberHex
     @when_connected = Time.new
     @my_muc = Jabber::MUC::SimpleMUCClient.new(client)
     my_muc.on_message do |time, sender, text| 
-      if not !!time
-        time = Time.new
-      end
       if not still_connecting
-        spoken(sender, text, time)
+        if !!time
+          spoken(sender, text, time)
+        else
+          #unfortunately misconfigured servers do not send time
+          time = Time.new
+          spoken(sender, text, time)
+          #spoken_from_history(sender, text, time)
+        end
       end
     end
     my_muc.on_private_message do |time, sender, text| 
@@ -47,6 +51,10 @@ class JabberHex
   end
 
   def spoken(who, what, time)
+    #intentionally empty
+  end
+
+  def spoken_from_history(who, what, time)
     #intentionally empty
   end
 

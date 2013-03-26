@@ -34,7 +34,7 @@ class BotSolid
 
     params = Channel.fetch_action_params what
     if params
-      if 'help' == params
+      if %w'help ?'.include? params
         say_solid_help
       else
         say_solid_principle params.downcase

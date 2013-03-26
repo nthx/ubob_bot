@@ -28,11 +28,13 @@ class BotCow
       cmd = 'fortune'
       params = nil
     elsif action == 'cow' and params == 'fortune'
-      cmd = 'fortune | /usr/games/cowsay'
+      cmd = 'fortune | /usr/bin/cowsay'
       params = nil
     elsif action == 'cow' and params
-      cmd = "/usr/games/cowsay"
+      cmd = "/usr/bin/cowsay"
       params = params
+    else
+      puts "que? #{action}, #{params}"
     end
 
     out = run_drawing_process(cmd, params)

@@ -11,6 +11,7 @@ require_relative './solid'
 require_relative './kill_bartek'
 require_relative './c_programming'
 require_relative './help'
+require_relative './dta'
 
 class Usecases
   attr_reader :leaderboard, :usecase_plusone
@@ -34,6 +35,7 @@ class Usecases
     usecases << BotVersion
     usecases << BotBotheringMe
     usecases << BotCProgramming
+    usecases << DTA
 
     usecases.map do |clazz|
       usecase = clazz.new domain

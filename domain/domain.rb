@@ -20,12 +20,12 @@ end
 
 
 class Domain
-  def start(room_name)
+  def domain_starts(room_name)
     @room = Room.new(room_name)
   end
 
-  def participant_speaks(who, what, time)
     puts "> #{time} #{who}: \"#{what}\""
+  def participant_speaks(who, what, time)
     to_whom = Channel.fetch_receivier(what)
     someone_spoken_in_room(who, to_whom, what, time)
   end

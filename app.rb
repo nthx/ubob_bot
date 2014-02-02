@@ -21,8 +21,8 @@ class App
   end
 
   def apply_domain_glue
-    after @domain, :start do |jp, domain, param1, param2|
-      @jabber.connect config.jid, config.group_chat, config.password
+    after @domain, :domain_starts do |jp, domain, param1, param2|
+      @jabber.connect(config.jid, config.group_chat, config.password)
     end
 
     after @domain, :bot_speaks do |jp, domain, what|
@@ -34,12 +34,12 @@ class App
     end
   end
 
-  def initialize_usecases
-    @usecases = Usecases.new @domain
+  def start_usecases
+    @usecases = Usecases.new(@domain)
   end
 
   def apply_usecases_glue
-    before @domain, :start do |jp, domain|
+    before @domain, :domain_starts do |jp, domain|
       @persistence.load_usecase_data(@config.room, @config.db_plus_one, @usecases.leaderboard)
     end
     after @usecases.usecase_plusone, :remember do |jp, usecase_plusone|
@@ -47,17 +47,18 @@ class App
     end
   end
 
-  def start
-    @domain.start "middleware"
+  def start_app
+    @domain.domain_starts(@config.room)
+    puts "App started."
   end
 end
 
 
 app = App.new
 app.apply_domain_glue
-app.initialize_usecases
+app.start_usecases
 app.apply_usecases_glue
-app.start
+app.start_app
 
 #Example calls
 jabber = app.jabber

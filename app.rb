@@ -68,4 +68,5 @@ jabber = app.jabber
 #jabber.spoken("kuba", "bot: leaderboard", Time.new)
 #jabber.spoken("kuba", "bot: solid", Time.new)
 
-sleep(99999)
+#Go to endless "loop" - have no idea how to do different way
+sleep(9999999999)

@@ -9,6 +9,7 @@ require_relative './say_lama'
 require_relative './version'
 require_relative './solid'
 require_relative './kill_bartek'
+require_relative './store_talk_archive'
 require_relative './c_programming'
 require_relative './help'
 require_relative './dta'
@@ -16,13 +17,15 @@ require_relative './dta'
 class Usecases
   attr_reader :leaderboard, :usecase_plusone
 
-  def initialize(domain)
+  def initialize(domain, config)
     @domain = domain
     @leaderboard = {}
+    @config = config
 
     usecases = []
     running = {}
 
+    usecases << StoreTalkArchive
     usecases << BotWelcome
     usecases << BotLama
     usecases << BotCow
@@ -49,6 +52,7 @@ class Usecases
     running[BotBotheringMe].setup(running)
     running[PlusOneLeaderboard].setup(@leaderboard)
     running[BotShowLeaderboard].setup(@leaderboard)
+    running[StoreTalkArchive].setup(@config.room)
 
     @usecase_plusone = running[PlusOneLeaderboard]
   end

@@ -20,6 +20,8 @@ end
 
 
 class Domain
+  attr_accessor :room
+
   def domain_starts(room_name)
     @room = Room.new(room_name)
   end

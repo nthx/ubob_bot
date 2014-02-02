@@ -36,7 +36,7 @@ class App
   end
 
   def start_usecases
-    @usecases = Usecases.new(@domain)
+    @usecases = Usecases.new(@domain, @config)
   end
 
   def apply_usecases_glue

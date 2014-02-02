@@ -30,23 +30,24 @@ class JabberHex
 
     @when_connected = Time.new
     @my_muc = Jabber::MUC::SimpleMUCClient.new(client)
-    my_muc.on_message do |time, sender, text| 
+
+    my_muc.on_message do |time, sender, text|
       if not still_connecting
-        if !!time
-          spoken(sender, text, time)
-        else
-          #unfortunately misconfigured servers do not send time
-          time = Time.new
-          spoken(sender, text, time)
-          #spoken_from_history(sender, text, time)
-        end
+        time = fix_msg_time(time)
+        spoken(sender, text, time)
+      else
+        puts "still_connecting.."
       end
     end
+
     my_muc.on_private_message do |time, sender, text| 
       if not still_connecting
         private_message_to_bot(sender, text, time)
+      else
+        puts "still_connecting.."
       end
     end
+
     my_muc.join(group_chat_jid)
   end
 
@@ -68,18 +69,23 @@ class JabberHex
   end
 
   private
-  def private_msg(whom, what)
-    msg = Message::new("tomekn@jabber", "Hello... John? #{Time.new}")
-    msg.type=:chat
-    client.send(msg)
-  end
+  #def private_msg(whom, what)
+  #  msg = Message::new("tomekn@jabber", "Hello... John? #{Time.new}")
+  #  msg.type=:chat
+  #  client.send(msg)
+  #end
 
-  # Give 5 secs to read history messages Jabber sends when connecting
+  # Give few secs to read history messages Jabber sends when connecting
   # I don't want to parse them again, as they're duplicates
   def still_connecting
     warmup=3
     now = Time.new
     (now - @when_connected).to_i <= warmup
+  end
+
+  def fix_msg_time(time)
+    #unfortunately misconfigured servers do not send time
+    time || Time.new.utc
   end
 
 end

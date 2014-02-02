@@ -30,6 +30,7 @@ class App
     end
 
     after @jabber, :spoken do |jp, jabber, who, what, time|
+      puts "> #{time} #{who}: \"#{what}\""
       @domain.participant_speaks(who, what, time)
     end
   end

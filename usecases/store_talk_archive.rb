@@ -1,5 +1,3 @@
-require 'yaml'
-
 class StoreTalkArchive
   include RoomObserver
 

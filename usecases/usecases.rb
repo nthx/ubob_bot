@@ -42,6 +42,7 @@ class Usecases
       running[clazz] = usecase
     end
 
+    #these need custom setup
     running[BotHelp].setup(running)
     running[BotBotheringMe].setup(running)
     running[PlusOneLeaderboard].setup(@leaderboard)
@@ -50,6 +51,3 @@ class Usecases
     @usecase_plusone = running[PlusOneLeaderboard]
   end
 end
-
-
-

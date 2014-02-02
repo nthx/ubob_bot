@@ -20,3 +20,4 @@ configuration/settings.rb
 .rvmrc
 
 *.swp
+.idea

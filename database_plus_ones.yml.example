@@ -1,0 +1,8 @@
+---
+bot:
+  :number: 1
+  :history: {}
+someone:
+  :number: 4
+  :history: {}
+

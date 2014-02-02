@@ -1,8 +1,6 @@
 ---
-bot:
-  :number: 1
-  :history: {}
-someone:
-  :number: 4
-  :history: {}
-
+:room: ???
+:plus_ones:
+  bot:
+    :number: 0
+    :history: {}

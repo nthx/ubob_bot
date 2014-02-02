@@ -21,3 +21,4 @@ configuration/settings.rb
 
 *.swp
 .idea
+*-database_plus_ones.yml

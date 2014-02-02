@@ -22,7 +22,7 @@ class App
 
   def apply_domain_glue
     after @domain, :start do |jp, domain, param1, param2|
-      @jabber.connect config.jid, config.room, config.password
+      @jabber.connect config.jid, config.group_chat, config.password
     end
 
     after @domain, :bot_speaks do |jp, domain, what|
@@ -40,10 +40,10 @@ class App
 
   def apply_usecases_glue
     before @domain, :start do |jp, domain|
-      @persistence.load_usecase_data(@config.db_plus_one, @usecases.leaderboard)
+      @persistence.load_usecase_data(@config.room, @config.db_plus_one, @usecases.leaderboard)
     end
     after @usecases.usecase_plusone, :remember do |jp, usecase_plusone|
-      @persistence.store_usecase_data(@config.db_plus_one, @usecases.leaderboard)
+      @persistence.store_usecase_data(@config.room, @config.db_plus_one, @usecases.leaderboard)
     end
   end
 

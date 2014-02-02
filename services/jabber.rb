@@ -14,9 +14,9 @@ class JabberHex
   end
 
   #public API
-  def connect(jid, room, password)
+  def connect(jid, group_chat, password)
     client_jid = JID::new(jid)
-    room_jid = JID.new(room)
+    group_chat_jid = JID.new(group_chat)
 
     @client = Client::new(client_jid)
     client.connect
@@ -47,7 +47,7 @@ class JabberHex
         private_message_to_bot(sender, text, time)
       end
     end
-    my_muc.join(room_jid)
+    my_muc.join(group_chat_jid)
   end
 
   def spoken(who, what, time)

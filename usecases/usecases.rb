@@ -42,6 +42,8 @@ class Usecases
       running[clazz] = usecase
     end
 
+    validate_usacases_configuration!(running)
+
     #these need custom setup
     running[BotHelp].setup(running)
     running[BotBotheringMe].setup(running)
@@ -49,5 +51,15 @@ class Usecases
     running[BotShowLeaderboard].setup(@leaderboard)
 
     @usecase_plusone = running[PlusOneLeaderboard]
+  end
+
+  private
+  def validate_usacases_configuration!(usecases)
+    usecases.each do |klazz, uc|
+      if !uc.respond_to? 'watch_room'
+        raise "Error: #{klazz}: must be configured correctly with RoomObserver. See examples"
+      end
+    end
+
   end
 end

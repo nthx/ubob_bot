@@ -4,17 +4,34 @@ include AquariumHelper
 module RoomObserver
   def watch_room
     after domain, :someone_spoken_in_room do |jp, domain, *args|
-      err_msg = "had a nil when it didn't expected"
-      begin
-        who, to_whom, what, time = *args
-        on_say(*args)
-      rescue Exception => e
-        if !what.include? err_msg #not to go into infinite loop
-          domain.bot_speaks "#{self.class.name}: #{err_msg}"
+      who, to_whom, what, time = *args
+      if respond_to? 'on_say'
+        begin
+          on_say(*args)
+        rescue Exception => e
+          handle_on_say_errors(what, domain, e)
         end
-        puts "#{self.class.name}: #{e}"
+
+      elsif respond_to? 'on_user_say'
+        begin
+          on_user_say(*args)
+        rescue Exception => e
+          handle_on_say_errors(what, domain, e)
+        end
+
+      else
+        raise "#{self.class.name}: Neither on_say* implemented"
       end
     end
+  end
+
+  private
+  def handle_on_say_errors(what, domain, e)
+    err_msg = "had a nil when it didn't expected"
+    if !what.include? err_msg #not to go into infinite loop
+      domain.bot_speaks "#{self.class.name}: #{err_msg}"
+    end
+    puts "#{self.class.name}: #{e}"
   end
 end
 

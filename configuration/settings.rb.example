@@ -8,6 +8,7 @@ class Settings
     @password = 'my.password'
     @db_plus_one = "#{@room}-database_plus_ones.yml"
     @db_chat = "#{@room}-database_chat.yml"
+    @db_downloaded_links = "#{@room}-downloaded_links/"
   end
 end
 

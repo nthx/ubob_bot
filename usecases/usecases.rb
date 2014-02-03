@@ -10,12 +10,13 @@ require_relative './version'
 require_relative './solid'
 require_relative './kill_bartek'
 require_relative './store_talk_archive'
+require_relative './async_link_download'
 require_relative './c_programming'
 require_relative './help'
 require_relative './dta'
 
 class Usecases
-  attr_reader :leaderboard, :usecase_plusone
+  attr_reader :leaderboard, :usecase_plusone, :usecase_async_link_download
 
   def initialize(domain, config)
     @domain = domain
@@ -26,6 +27,7 @@ class Usecases
     running = {}
 
     usecases << StoreTalkArchive
+    usecases << AsyncLinkDownload
     usecases << BotWelcome
     usecases << BotLama
     usecases << BotCow
@@ -55,6 +57,7 @@ class Usecases
     running[StoreTalkArchive].setup(@config.room)
 
     @usecase_plusone = running[PlusOneLeaderboard]
+    @usecase_async_link_download = running[AsyncLinkDownload]
   end
 
   private
@@ -62,6 +65,9 @@ class Usecases
     usecases.each do |klazz, uc|
       if !uc.respond_to? 'watch_room'
         raise "Error: #{klazz}: must be configured correctly with RoomObserver. See examples"
+      end
+      if !(uc.respond_to? 'on_say' or uc.respond_to? 'on_user_say')
+        raise "Error: #{klazz}: must respond to: on_say/on_user_say fn"
       end
     end
 

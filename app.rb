@@ -3,6 +3,7 @@ require './domain/domain'
 require './usecases/usecases'
 require './services/jabber'
 require './services/persistence'
+require_relative 'services/link_downloader'
 require './configuration/settings'
 require './lib/aquarium_helper'
 
@@ -17,6 +18,7 @@ class App
     @config = Settings.new
     @domain = Domain.new
     @jabber = JabberHex.new
+    @link_downloader = LinkDownloaderHex.new
     @persistence = PersistenceHex.new
   end
 
@@ -45,6 +47,10 @@ class App
     end
     after @usecases.usecase_plusone, :remember do |jp, usecase_plusone|
       @persistence.store_usecase_data(@config.room, @config.db_plus_one, @usecases.leaderboard)
+    end
+
+    after @usecases.usecase_async_link_download, :user_provided_link do |jp, usecase, time, who, link|
+      @link_downloader.download_link(@config.room, time, who, link)
     end
   end
 

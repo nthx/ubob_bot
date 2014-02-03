@@ -1,5 +1,5 @@
 class Settings
-  attr_accessor :jid, :group_chat, :room, :password, :db_plus_one, :db_chat
+  attr_accessor :jid, :group_chat, :room, :password, :db_plus_one, :db_chat, :db_downloaded_links
 
   def initialize
     @room = 'some.groupchat'

@@ -50,7 +50,7 @@ class App
     end
 
     after @usecases.usecase_async_link_download, :user_provided_link do |jp, usecase, time, who, link|
-      @link_downloader.download_link(@config.room, time, who, link)
+      @link_downloader.download_link(@config.db_downloaded_links, @config.room, time, who, link)
     end
   end
 

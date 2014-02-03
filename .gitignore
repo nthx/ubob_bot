@@ -17,8 +17,10 @@ tmp
 _yardoc
 doc/
 configuration/settings.rb
+*-database_plus_ones.yml
+*-database_talk_archive.yml
+downloaded_links/
 .rvmrc
 
 *.swp
 .idea
-*-database_plus_ones.yml

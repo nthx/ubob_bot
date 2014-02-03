@@ -1,3 +1,7 @@
+##
+#  This implementation is not "hex" friendly. See "AsyncLinkDownloader" for
+#  better separation
+#
 class StoreTalkArchive
   include RoomObserver
 
@@ -18,6 +22,8 @@ class StoreTalkArchive
 
   def on_say(who, to_whom, what, time)
     archive = "#{@room}: #{time}: #{who}: #{what}\n"
+
+    #impl below is correct, but should be split into "hex"
     store!(archive)
   end
 

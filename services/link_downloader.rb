@@ -24,6 +24,6 @@ class LinkDownloaderHex
   private
   def validate_redis_resque_ha!
     Resque.redis = "localhost:6379:#{REDIS_RESQUE_DATABASE_NO}" # default localhost:6379
-    Resque::Plugins::Status::Hash.expire_in = (24 * 60 * 60) # 24hrs in seconds
+    Resque::Plugins::Status::Hash.expire_in = (10 * 24 * 60 * 60) # 10 * 24hrs in seconds
   end
 end
